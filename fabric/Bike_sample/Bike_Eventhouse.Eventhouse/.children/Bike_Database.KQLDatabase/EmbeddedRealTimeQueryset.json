@@ -1,0 +1,28 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "0d8cda88-8a7c-4cdb-92a6-a4d9bc5d4e6c",
+        "clusterUri": "https://trd-uv2wtazytfbkzvszhz.z9.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "091c83e5-d659-4a79-9dfc-238b4d342d98"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "6f318348-4e6f-4900-958c-f00736c11c47",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nBikestream\n| take 100\n\n// See how many records are in the table.\nBikestream\n| count\n\n// This query returns the number of ingestions per hour in the given table.\nBikestream\n| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "0d8cda88-8a7c-4cdb-92a6-a4d9bc5d4e6c"
+      },
+      {
+        "id": "f43ca98f-8ecc-4622-80ff-b545f2a21be1",
+        "content": " SELECT CASE\n          WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'\n          ELSE Neighbourhood\n        END AS Neighbourhood,\n        SUM(No_Bikes) AS [Total Number of Bikes]\n FROM Bikestream\n GROUP BY CASE\n            WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'\n            ELSE Neighbourhood\n          END\n HAVING Neighbourhood = 'Chelsea'\n ORDER BY Neighbourhood ASC;",
+        "title": "",
+        "dataSourceId": "0d8cda88-8a7c-4cdb-92a6-a4d9bc5d4e6c"
+      }
+    ],
+    "querysetType": "Embedded"
+  }
+}
